@@ -441,7 +441,22 @@
     }
 
     @media (max-width: 600px) {
-      .payslip-grid { grid-template-columns: 1fr; }
+      .payslip-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        grid-template-columns: unset;
+        gap: 0;
+        scrollbar-width: none;
+      }
+      .payslip-grid::-webkit-scrollbar { display: none; }
+      .payslip-card {
+        flex: 0 0 88vw;
+        scroll-snap-align: center;
+        margin-right: 12px;
+      }
+      .payslip-card:last-child { margin-right: 0; }
     }
 
     .payslip-card {
@@ -1127,7 +1142,21 @@
       margin-top: 48px;
     }
     @media (max-width: 900px) {
-      .beispiele-grid { grid-template-columns: 1fr; }
+      .beispiele-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 16px;
+        padding-bottom: 16px;
+        scrollbar-width: none;
+      }
+      .beispiele-grid::-webkit-scrollbar { display: none; }
+      .beispiel-card {
+        flex: 0 0 82vw;
+        max-width: 340px;
+        scroll-snap-align: center;
+      }
     }
     .beispiel-card {
       background: var(--navy-light);
@@ -1517,10 +1546,9 @@
       .hero-inner { gap: 32px; padding: 48px 0; }
       .hero-card { padding: 20px; }
       .hero-card-metric-val { font-size: 1.2rem; }
-      .hero-stats { flex-wrap: wrap; gap: 16px; }
-      .hero-stat { flex: 1 1 40%; }
+      .hero-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
       .rechner-header h2 { font-size: 1.3rem; }
-      .rechner-wrapper { gap: 20px; }
+      .rechner-wrapper { gap: 20px; flex-direction: column-reverse; }
       .rechner-inputs { padding: 20px 16px; }
       .result-card { padding: 16px; }
       .result-card-value { font-size: 1.6rem; }
@@ -1548,8 +1576,7 @@
       .hero-visual { display: flex; }
       .hero-actions { flex-direction: column; }
       .btn-primary, .btn-secondary { justify-content: center; width: 100%; }
-      .hero-stat { flex: 1 1 40%; }
-      .rechner-wrapper { grid-template-columns: 1fr; }
+      .rechner-wrapper { display: flex; flex-direction: column-reverse; }
       .result-grid { grid-template-columns: 1fr 1fr; }
       .community-stats { grid-template-columns: 1fr 1fr; }
       .cta-actions { flex-direction: column; align-items: center; }
@@ -1889,7 +1916,7 @@
             </div>
             <div class="hero-stat">
               <div class="hero-stat-num" style="font-size: 2rem;">Ø 5,2%</div>
-              <div class="hero-stat-label">Mietrendite</div>
+              <div class="hero-stat-label">Ø Mietrendite</div>
             </div>
           </div>
         </div>
@@ -2729,5 +2756,29 @@
     });
   </script>
 
+
+  // Auto-scroll Beispiele carousel on mobile
+  (function() {
+    var grid = document.querySelector('.beispiele-grid');
+    if (!grid) return;
+    var cards = grid.querySelectorAll('.beispiel-card');
+    if (cards.length < 2) return;
+    var current = 0;
+    var interval = null;
+    function isMobile() { return window.innerWidth <= 900; }
+    function scrollTo(idx) {
+      current = idx % cards.length;
+      cards[current].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+    function start() {
+      if (!isMobile()) return;
+      interval = setInterval(function() { scrollTo(current + 1); }, 3000);
+    }
+    function stop() { clearInterval(interval); interval = null; }
+    grid.addEventListener('touchstart', stop, { passive: true });
+    grid.addEventListener('touchend', function() { setTimeout(start, 5000); }, { passive: true });
+    window.addEventListener('resize', function() { stop(); if (isMobile()) start(); });
+    start();
+  })();
 </body>
 </html>
