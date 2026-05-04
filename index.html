@@ -2801,30 +2801,6 @@
   </script>
 
 
-  <script>
-  // Auto-scroll Beispiele carousel on mobile
-  (function() {
-    var grid = document.querySelector('.beispiele-grid');
-    if (!grid) return;
-    var cards = grid.querySelectorAll('.beispiel-card');
-    if (cards.length < 2) return;
-    var current = 0;
-    var interval = null;
-    function isMobile() { return window.innerWidth <= 900; }
-    function scrollTo(idx) {
-      current = idx % cards.length;
-      cards[current].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-    }
-    function start() {
-      if (!isMobile()) return;
-      interval = setInterval(function() { scrollTo(current + 1); }, 3000);
-    }
-    function stop() { clearInterval(interval); interval = null; }
-    grid.addEventListener('touchstart', stop, { passive: true });
-    grid.addEventListener('touchend', function() { setTimeout(start, 5000); }, { passive: true });
-    window.addEventListener('resize', function() { stop(); if (isMobile()) start(); });
-    start();
-  })();
-  </script>
+
 </body>
 </html>
