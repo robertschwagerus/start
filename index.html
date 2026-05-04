@@ -1552,7 +1552,7 @@
       .hero-card-metric-val { font-size: 1.2rem; }
       .hero-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
       .rechner-header h2 { font-size: 1.3rem; }
-      .rechner-wrapper { display: flex; flex-direction: column-reverse; gap: 20px; }
+      .rechner-wrapper { grid-template-columns: 1fr; gap: 20px; }
       .rechner-inputs { padding: 20px 16px; }
       .result-card { padding: 16px; }
       .result-card-value { font-size: 1.6rem; }
@@ -1580,7 +1580,7 @@
       .hero-visual { display: flex; }
       .hero-actions { flex-direction: column; }
       .btn-primary, .btn-secondary { justify-content: center; width: 100%; }
-      .rechner-wrapper { display: flex; flex-direction: column-reverse; }
+
       .result-grid { grid-template-columns: 1fr 1fr; }
       .community-stats { grid-template-columns: 1fr 1fr; }
       .cta-actions { flex-direction: column; align-items: center; }
@@ -1592,15 +1592,40 @@
     /* ============================
        LEAD GATE — MODAL
     ============================ */
+
+    .btn-rechner-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      margin-top: 24px;
+      padding: 18px 28px;
+      background: var(--gold);
+      color: var(--navy);
+      border: none;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 8px 30px rgba(201,168,76,0.35);
+      transition: all 0.2s ease;
+    }
+    .btn-rechner-cta:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(201,168,76,0.45);
+    }
+    .rechner-cta-sub {
+      text-align: center;
+      color: var(--text-light);
+      font-size: 0.8rem;
+      margin-top: 10px;
+    }
     .results-gate {
       position: relative;
     }
-    .results-locked .rechner-results {
-      filter: blur(6px);
-      pointer-events: none;
-      user-select: none;
-      opacity: 0.5;
-    }
+
     .results-unlock-overlay {
       position: absolute;
       inset: 0;
@@ -2190,19 +2215,8 @@
           </div>
         </div>
 
-        <!-- Results Gate -->
-        <div class="results-gate results-locked" id="resultsGate">
-          <!-- Unlock Overlay (visible when locked) -->
-          <div class="results-unlock-overlay" id="unlockOverlay">
-            <div class="unlock-icon">🔓</div>
-            <div>
-              <strong>Deine Zahlen sind fertig berechnet.</strong>
-              <p>Wohin sollen wir deine persönliche Auswertung schicken?</p>
-            </div>
-            <button class="btn-unlock" onclick="openLeadModal()">Jetzt Ergebnis anzeigen</button>
-          </div>
-
         <!-- Results -->
+        <div class="results-gate" id="resultsGate">
         <div class="rechner-results">
           <!-- Verdict -->
           <div class="result-card verdict" id="verdictCard">
@@ -2242,6 +2256,13 @@
             <div class="result-card-sub">Geschätzte Wertsteigerung (3% p.a.) plus Tilgung</div>
           </div>
         </div>
+
+          <!-- Rechner CTA -->
+          <button class="btn-rechner-cta" onclick="openLeadModal()">
+            Jetzt persönlich beraten lassen
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+          <p class="rechner-cta-sub">Kostenlos &amp; unverbindlich · 30 Minuten · 120+ vermittelte Immobilien</p>
         </div><!-- end results-gate -->
       </div>
 
@@ -2671,10 +2692,6 @@
     }
 
     function unlockResults() {
-      const gate = document.getElementById('resultsGate');
-      const overlay = document.getElementById('unlockOverlay');
-      gate.classList.remove('results-locked');
-      overlay.style.display = 'none';
       berechne();
     }
 
