@@ -1491,8 +1491,9 @@
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 1024px) {
-      .hero-inner { grid-template-columns: 1fr; gap: 48px; }
-      .hero-visual { display: none; }
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; padding: 48px 0 60px; }
+      .hero-visual { display: flex; justify-content: center; }
+      .hero-card { max-width: 100%; }
       .about-inner { grid-template-columns: 1fr; }
       .about-portrait { max-width: 360px; }
       .about-portrait-frame { aspect-ratio: 3/2; }
@@ -1514,24 +1515,48 @@
         gap: 16px;
       }
       .nav-mobile-toggle { display: flex; }
-      .hero-stats { flex-wrap: wrap; gap: 24px; }
+      .hero-headline { font-size: clamp(1.7rem, 6vw, 2.4rem); }
+      .hero-subline { font-size: 0.95rem; }
+      .hero-stats { flex-wrap: wrap; gap: 20px; }
+      .hero-stat { flex: 1 1 40%; }
       .pillars-grid { grid-template-columns: 1fr; }
       .testimonials-grid { grid-template-columns: 1fr; }
       .result-grid { grid-template-columns: 1fr; }
       .makerus-stats-grid { grid-template-columns: 1fr 1fr; }
-      .footer-inner { flex-direction: column; }
-      .footer-bottom { flex-direction: column; align-items: flex-start; }
-      .footer-disclaimer { text-align: left; }
-      section { padding: 72px 0; }
-      #hero { padding-top: 64px; }
+      .footer-inner { flex-direction: column; gap: 32px; }
+      .footer-links-group { min-width: 0; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .footer-disclaimer { text-align: left; font-size: 0.75rem; }
+      section { padding: 64px 0; }
+      #hero { padding-top: 64px; min-height: auto; }
       .container { padding: 0 16px; }
+      .hero-card { padding: 24px; }
+      .hero-card-metric-val { font-size: 1.3rem; }
+      .rechner-inputs { padding: 24px 20px; }
+      .result-card { padding: 20px; }
+      .about-quote { font-size: 0.95rem; padding: 16px 20px; }
+      .community-stats { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .payslip-grid { gap: 12px; }
+      .beispiele-grid { grid-template-columns: 1fr; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .modal-box { padding: 32px 20px; }
+      h2 { font-size: clamp(1.5rem, 5vw, 2rem); }
     }
 
     @media (max-width: 480px) {
-      .hero-headline { font-size: 2rem; }
+      .hero-headline { font-size: 1.65rem; line-height: 1.15; }
       .hero-actions { flex-direction: column; }
-      .btn-primary, .btn-secondary { justify-content: center; }
+      .btn-primary, .btn-secondary { justify-content: center; width: 100%; }
+      .hero-stats { gap: 16px; }
+      .hero-stat { flex: 1 1 100%; }
+      .hero-stat-num { font-size: 1.6rem; }
       .cta-actions { flex-direction: column; align-items: center; }
+      .community-stats { grid-template-columns: 1fr; }
+      .community-stat-num { font-size: 2rem; }
+      .payslip-result strong { font-size: 1.3rem; }
+      .rechner-header h2 { font-size: 1.4rem; }
+      .cta-inner h2 { font-size: 1.5rem; }
+      .section-tag { font-size: 0.68rem; }
     }
 
     /* ============================
@@ -2275,7 +2300,7 @@
             Senken sich meine Steuern sofort?
             <span class="faq-icon">↓</span>
           </div>
-          <div class="faq-answer"><p>Direkt nach dem Notartermin beginnt die steuerliche Wirkung. Die Abschreibung auf den Gebäudeanteil und die absetzbaren Zinsen reduzieren dein zu versteuerndes Einkommen bereits im ersten Jahr. Wie stark das bei dir wirkt, zeigen wir dir konkret im Erstgespräch.</p></div>
+          <div class="faq-answer"><p>Ja. Direkt nach dem Notartermin beginnt die steuerliche Wirkung. Du kannst Zinsen, Abschreibung und Bewirtschaftungskosten von der Steuer absetzen und das reduziert dein zu versteuerndes Einkommen noch im ersten Jahr. Wie viel das bei dir konkret ausmacht, rechnen wir dir im Erstgespräch durch.</p></div>
         </div>
 
         <div class="faq-item">
@@ -2283,7 +2308,7 @@
             Kann ich ohne Eigenkapital kaufen?
             <span class="faq-icon">↓</span>
           </div>
-          <div class="faq-answer"><p>Ja, das ist bei ausreichender Bonität möglich. Banken finanzieren in vielen Fällen den kompletten Kaufpreis inklusive Nebenkosten. Das ist kein Versprechen für jeden, sondern ein realistisches Ergebnis für Käufer mit solidem Einkommen und sauberer Schufa. Dein Berater prüft das individuell mit dir.</p></div>
+          <div class="faq-answer"><p>Ja, das ist möglich. Banken finanzieren bei ausreichender Bonität den kompletten Kaufpreis inklusive Nebenkosten. Voraussetzung ist ein solides Einkommen und eine saubere Schufa. Ob das bei dir funktioniert, klären wir gemeinsam im ersten Gespräch.</p></div>
         </div>
 
         <div class="faq-item">
@@ -2291,7 +2316,7 @@
             Wo stehen eure Immobilien?
             <span class="faq-icon">↓</span>
           </div>
-          <div class="faq-answer"><p>Wir konzentrieren uns auf Lagen in Deutschland mit stabiler Mietnachfrage und solider Entwicklung. Keine Zufallsobjekte, sondern bewusste Auswahl nach wirtschaftlichen und demographischen Kriterien. Im Gespräch zeigen wir dir, welche Objekte aktuell verfügbar sind.</p></div>
+          <div class="faq-answer"><p>Wir konzentrieren uns auf deutsche Städte mit stabiler Mietnachfrage, überwiegend Nordrhein-Westfalen und angrenzende Regionen. Keine Großstadtpreise, aber solide Mieten und gute Wertstabilität. Welche Objekte aktuell verfügbar sind, zeigen wir dir im Gespräch.</p></div>
         </div>
 
         <div class="faq-item">
@@ -2299,7 +2324,7 @@
             Wie lange dauert der Prozess?
             <span class="faq-icon">↓</span>
           </div>
-          <div class="faq-answer"><p>Von der ersten Beratung bis zum Notartermin vergehen im Schnitt sechs bis zwölf Wochen. Das hängt von der Finanzierungsgeschwindigkeit und der Objektverfügbarkeit ab. Wer vorbereitet in das Erstgespräch kommt, ist schneller.</p></div>
+          <div class="faq-answer"><p>Von der ersten Beratung bis zum Notartermin vergehen im Schnitt sechs bis zwölf Wochen. Wer gut vorbereitet ins Erstgespräch kommt, ist meistens schneller.</p></div>
         </div>
 
         <div class="faq-item">
@@ -2307,7 +2332,7 @@
             Kümmert ihr euch auch um die Finanzierung?
             <span class="faq-icon">↓</span>
           </div>
-          <div class="faq-answer"><p>Ja. Wir begleiten dich durch den gesamten Prozess: von der Objektauswahl über die Finanzierungsstruktur bis hin zum Notartermin. Du musst dich um nichts alleine kümmern.</p></div>
+          <div class="faq-answer"><p>Ja. Wir begleiten dich von der Objektauswahl über die Finanzierung bis zum Notartermin. Du musst dich um nichts alleine kümmern.</p></div>
         </div>
 
         <div class="faq-item">
@@ -2315,7 +2340,7 @@
             Ist nach der ersten Immobilie Schluss?
             <span class="faq-icon">↓</span>
           </div>
-          <div class="faq-answer"><p>Nein. Für die meisten in unserer Community ist die erste Immobilie der Anfang. Viele bauen sich über die Jahre ein Portfolio auf. Wir begleiten dich langfristig, nicht nur beim ersten Kauf.</p></div>
+          <div class="faq-answer"><p>Für die meisten ist sie der Anfang. Viele in unserer Community haben nach der ersten Immobilie eine zweite gekauft, dann eine dritte. Wir begleiten dich langfristig, nicht nur einmalig.</p></div>
         </div>
 
         <div class="faq-item">
@@ -2323,7 +2348,7 @@
             Welche Risiken gibt es?
             <span class="faq-icon">↓</span>
           </div>
-          <div class="faq-answer"><p>Jedes Investment trägt Risiken: Leerstand, Zinsänderungen, unerwartete Instandhaltungskosten. Wir rechnen diese Faktoren von Anfang an realistisch ein und zeigen dir nur Objekte, die auch in konservativen Szenarien tragbar sind.</p></div>
+          <div class="faq-answer"><p>Leerstand, Zinsänderungen, unerwartete Reparaturen — das sind reale Risiken. Wir rechnen sie von Anfang an ein und zeigen dir nur Objekte, die auch im schlechten Szenario noch funktionieren. Wer das nicht tut, lügt seinen Kunden an.</p></div>
         </div>
 
         <div class="faq-item">
@@ -2331,7 +2356,7 @@
             Was kostet das Erstgespräch?
             <span class="faq-icon">↓</span>
           </div>
-          <div class="faq-answer"><p>Nichts. Das Erstgespräch ist kostenlos und unverbindlich. Wir schauen uns gemeinsam deine Situation an und zeigen dir, ob und wie eine Kapitalanlage-Immobilie für dich funktionieren kann. Ob es weitergeht, entscheidest du.</p></div>
+          <div class="faq-answer"><p>Nichts. Kein Haken, kein versteckter Pitch. Wir schauen uns deine Situation an und sagen dir ehrlich, ob eine Immobilie für dich Sinn ergibt. Die Entscheidung liegt bei dir.</p></div>
         </div>
 
       </div>
