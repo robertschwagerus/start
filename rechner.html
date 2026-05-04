@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Immobilien-Rendite-Rechner | Makerus Consulting – Robert Schwagerus</title>
+  <meta name="description" content="In 60 Sekunden weißt du, ob sich eine Immobilie für dich rechnet. Kostenloser Rechner von Makerus Consulting – Cashflow, Rendite, Steuerersparnis." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0a1628;
+      --navy-mid: #0f2040;
+      --navy-light: #162a50;
+      --gold: #c9a84c;
+      --gold-light: #e2c26a;
+      --gold-dark: #a8882e;
+      --white: #ffffff;
+      --off-white: #f4f6fa;
+      --text-light: #94a3b8;
+      --text-mid: #cbd5e1;
+      --green: #22c55e;
+      --orange: #f59e0b;
+      --red: #ef4444;
+      --border: rgba(201, 168, 76, 0.2);
+      --shadow: 0 20px 60px rgba(0,0,0,0.4);
+      --radius: 16px;
+      --radius-sm: 8px;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 { line-height: 1.2; font-weight: 800; }
+    .gold { color: var(--gold); }
+    .text-light { color: var(--text-light); }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(10, 22, 40, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-logo {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--gold); }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-tagline {
+      font-size: 0.8rem;
+      color: var(--text-light);
+    }
+
+    .btn-nav-cta {
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 0.875rem;
+      padding: 9px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn-nav-cta:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+    }
+
+    /* ===== HERO ===== */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: var(--navy);
+      padding-top: 64px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-gradient {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 65% 45%, rgba(201, 168, 76, 0.055) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 50% at 5% 80%, rgba(15, 32, 64, 0.7) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201, 168, 76, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201, 168, 76, 0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 64px;
+      align-items: center;
+      min-height: calc(100vh - 64px);
+      padding: 72px 0;
+    }
+
+    /* Hero Left */
+    .hero-left {}
+
+    .section-tag {
+      display: inline-block;
+      background: rgba(201, 168, 76, 0.12);
+      border: 1px solid rgba(201, 168, 76, 0.3);
+      color: var(--gold);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .hero-eyebrow-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 12px var(--green);
+      animation: pulse 2s infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .hero-eyebrow-text {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-light);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .hero-headline {
+      font-size: clamp(2rem, 3.8vw, 3.2rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+      line-height: 1.1;
+    }
+
+    .hero-headline .line-gold {
+      color: var(--gold);
+      display: block;
+    }
+
+    .hero-subline {
+      font-size: 1.05rem;
+      color: var(--text-mid);
+      line-height: 1.75;
+      margin-bottom: 36px;
+      max-width: 440px;
+    }
+
+    /* Trust pills */
+    .trust-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 40px;
+    }
+
+    .trust-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(201, 168, 76, 0.07);
+      border: 1px solid rgba(201, 168, 76, 0.18);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-mid);
+    }
+
+    .trust-pill-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+    }
+
+    /* Robert card */
+    .robert-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--navy-mid);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 20px;
+      max-width: 360px;
+    }
+
+    .robert-avatar {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1rem;
+      color: var(--navy);
+      flex-shrink: 0;
+    }
+
+    .robert-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .robert-role {
+      font-size: 0.78rem;
+      color: var(--text-light);
+      margin-top: 2px;
+    }
+
+    .robert-badge {
+      margin-left: auto;
+      background: rgba(34, 197, 94, 0.12);
+      border: 1px solid rgba(34, 197, 94, 0.25);
+      color: var(--green);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+
+    /* Hero Right — Calculator */
+    .hero-right {}
+
+    .calc-card {
+      background: var(--navy-mid);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 36px;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .calc-card::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 24px; right: 24px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      border-radius: 0 0 3px 3px;
+    }
+
+    .calc-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+
+    .calc-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-mid);
+    }
+
+    .calc-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--gold);
+      background: rgba(201, 168, 76, 0.1);
+      border: 1px solid rgba(201, 168, 76, 0.25);
+      padding: 4px 12px;
+      border-radius: 100px;
+    }
+
+    /* Inputs */
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .input-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .input-label-text {
+      font-size: 0.83rem;
+      font-weight: 600;
+      color: var(--text-mid);
+    }
+
+    .input-value-display {
+      font-size: 0.83rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 5px;
+      background: rgba(201, 168, 76, 0.15);
+      border-radius: 3px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      background: var(--gold);
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(201, 168, 76, 0.5);
+      transition: box-shadow 0.2s;
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover {
+      box-shadow: 0 0 18px rgba(201, 168, 76, 0.8);
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      background: var(--gold);
+      border-radius: 50%;
+      cursor: pointer;
+      border: none;
+    }
+
+    .range-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 4px;
+    }
+
+    .range-label-item {
+      font-size: 0.68rem;
+      color: var(--text-light);
+    }
+
+    /* Advanced toggle */
+    .advanced-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      border: none;
+      color: var(--text-light);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 8px 0;
+      margin-bottom: 4px;
+      transition: color 0.2s;
+      font-family: inherit;
+    }
+
+    .advanced-toggle:hover { color: var(--gold); }
+
+    .advanced-toggle svg {
+      transition: transform 0.25s;
+    }
+
+    .advanced-toggle.open svg { transform: rotate(180deg); }
+
+    .advanced-inputs {
+      display: none;
+      padding-top: 4px;
+    }
+
+    .advanced-inputs.open { display: block; }
+
+    /* Divider */
+    .calc-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 20px 0;
+    }
+
+    /* Results */
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .result-box {
+      background: rgba(201, 168, 76, 0.05);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .result-box.main {
+      grid-column: 1 / -1;
+      background: rgba(201, 168, 76, 0.08);
+      border-color: rgba(201, 168, 76, 0.3);
+    }
+
+    .result-box-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-light);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .result-box-value {
+      font-size: 1.8rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      transition: color 0.35s;
+    }
+
+    .result-box.main .result-box-value { font-size: 2.4rem; }
+
+    .result-box-sub {
+      font-size: 0.74rem;
+      color: var(--text-light);
+      margin-top: 5px;
+    }
+
+    .result-box-value.secondary { font-size: 1.4rem; }
+
+    /* Verdict */
+    .verdict-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--navy);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 16px;
+    }
+
+    .verdict-label {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+    }
+
+    .verdict-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-weight: 800;
+      font-size: 0.875rem;
+      transition: all 0.35s;
+    }
+
+    .verdict-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .verdict-green  { background: rgba(34,197,94,0.15);  color: var(--green); }
+    .verdict-orange { background: rgba(245,158,11,0.15); color: var(--orange); }
+    .verdict-red    { background: rgba(239,68,68,0.15);  color: var(--red); }
+
+    .verdict-sub {
+      font-size: 0.72rem;
+      color: var(--text-light);
+      margin-top: 2px;
+    }
+
+    /* CTA under calc */
+    .calc-cta-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: 800;
+      font-size: 1rem;
+      padding: 15px 28px;
+      border-radius: 12px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 8px 28px rgba(201, 168, 76, 0.28);
+      width: 100%;
+      font-family: inherit;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 36px rgba(201, 168, 76, 0.38);
+    }
+
+    .calc-micro-copy {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-light);
+    }
+
+    /* ===== TRUST BAR ===== */
+    #trust {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--navy-mid);
+      padding: 40px 0;
+    }
+
+    .trust-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+      flex-wrap: wrap;
+    }
+
+    .trust-stat {
+      text-align: center;
+      padding: 0 48px;
+      border-right: 1px solid var(--border);
+    }
+
+    .trust-stat:last-child { border-right: none; }
+
+    .trust-stat-num {
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--gold);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      display: block;
+    }
+
+    .trust-stat-label {
+      font-size: 0.82rem;
+      color: var(--text-light);
+      margin-top: 6px;
+    }
+
+    /* ===== EXPLAINER ===== */
+    #erklaerung {
+      padding: 96px 0;
+      background: var(--navy);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.7rem, 3vw, 2.5rem);
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
+    }
+
+    .section-header p {
+      font-size: 1rem;
+      color: var(--text-mid);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .explainer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .explainer-card {
+      background: var(--navy-mid);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .explainer-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-dark));
+    }
+
+    .explainer-card:hover {
+      border-color: rgba(201, 168, 76, 0.45);
+      transform: translateY(-4px);
+    }
+
+    .explainer-icon {
+      width: 52px;
+      height: 52px;
+      background: rgba(201, 168, 76, 0.1);
+      border-radius: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+    }
+
+    .explainer-card h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+
+    .explainer-card p {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+
+    .explainer-threshold {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--gold);
+      background: rgba(201, 168, 76, 0.08);
+      border: 1px solid rgba(201, 168, 76, 0.2);
+      padding: 5px 12px;
+      border-radius: 100px;
+    }
+
+    /* ===== ROBERT SECTION ===== */
+    #robert {
+      padding: 96px 0;
+      background: var(--navy-mid);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .robert-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 72px;
+      align-items: center;
+    }
+
+    .robert-portrait-frame {
+      background: linear-gradient(135deg, var(--navy-light), var(--navy-mid));
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      aspect-ratio: 4/5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .robert-initials-big {
+      width: 110px;
+      height: 110px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--navy);
+      opacity: 0.85;
+    }
+
+    .robert-portrait-badge {
+      position: absolute;
+      bottom: 24px;
+      right: 24px;
+      background: var(--gold);
+      color: var(--navy);
+      border-radius: 12px;
+      padding: 9px 16px;
+      font-weight: 800;
+      font-size: 0.82rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    }
+
+    .robert-content h2 {
+      font-size: clamp(1.7rem, 2.8vw, 2.4rem);
+      letter-spacing: -0.03em;
+      margin-bottom: 18px;
+    }
+
+    .robert-content p {
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      line-height: 1.75;
+      margin-bottom: 14px;
+    }
+
+    .creds-list {
+      list-style: none;
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .creds-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: var(--text-mid);
+    }
+
+    .creds-check {
+      color: var(--gold);
+      font-weight: 900;
+      font-size: 1rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ===== FINAL CTA ===== */
+    #cta-final {
+      padding: 96px 0;
+      background: var(--navy);
+      text-align: center;
+    }
+
+    .cta-box {
+      background: var(--navy-mid);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 60px 48px;
+      max-width: 680px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 48px; right: 48px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .cta-box h2 {
+      font-size: clamp(1.7rem, 3vw, 2.5rem);
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+
+    .cta-box p {
+      font-size: 1rem;
+      color: var(--text-mid);
+      margin-bottom: 32px;
+      line-height: 1.7;
+    }
+
+    .btn-cta-final {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: 800;
+      font-size: 1.05rem;
+      padding: 17px 36px;
+      border-radius: 12px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 8px 32px rgba(201, 168, 76, 0.32);
+      font-family: inherit;
+    }
+
+    .btn-cta-final:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 42px rgba(201, 168, 76, 0.42);
+    }
+
+    .cta-micro {
+      margin-top: 14px;
+      font-size: 0.78rem;
+      color: var(--text-light);
+    }
+
+    /* ===== LEAD MODAL ===== */
+    .lead-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 22, 40, 0.88);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .lead-modal-overlay.open {
+      display: flex;
+    }
+
+    .lead-modal {
+      background: var(--navy-mid);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 48px 40px;
+      max-width: 480px;
+      width: 100%;
+      position: relative;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+    }
+
+    .lead-modal::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 32px; right: 32px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .lead-modal-close {
+      position: absolute;
+      top: 16px; right: 20px;
+      background: none;
+      border: none;
+      color: var(--text-light);
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: color 0.2s;
+      font-family: inherit;
+      line-height: 1;
+    }
+
+    .lead-modal-close:hover { color: var(--white); }
+
+    .lead-modal-icon {
+      width: 64px;
+      height: 64px;
+      background: rgba(201, 168, 76, 0.1);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 24px;
+    }
+
+    .lead-modal h3 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .lead-modal p {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    .lead-field {
+      margin-bottom: 14px;
+    }
+
+    .lead-field label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-mid);
+      margin-bottom: 6px;
+    }
+
+    .lead-field input {
+      width: 100%;
+      background: rgba(201, 168, 76, 0.06);
+      border: 1px solid rgba(201, 168, 76, 0.2);
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .lead-field input:focus {
+      border-color: var(--gold);
+      background: rgba(201, 168, 76, 0.1);
+    }
+
+    .lead-field input::placeholder { color: var(--text-light); }
+
+    .lead-error {
+      display: none;
+      color: var(--red);
+      font-size: 0.8rem;
+      margin-bottom: 12px;
+      padding: 10px 14px;
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      border-radius: 8px;
+    }
+
+    .lead-submit {
+      width: 100%;
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: 800;
+      font-size: 1rem;
+      padding: 14px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      font-family: inherit;
+      margin-top: 4px;
+    }
+
+    .lead-submit:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+    }
+
+    .lead-privacy {
+      text-align: center;
+      font-size: 0.72rem;
+      color: var(--text-light);
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--navy-mid);
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-logo {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .footer-logo span { color: var(--gold); }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--gold); }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--text-light);
+    }
+
+    /* ===== FADE-IN ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        padding: 56px 0;
+      }
+
+      .hero-headline { font-size: clamp(2rem, 6vw, 2.8rem); }
+
+      .explainer-grid { grid-template-columns: 1fr; }
+
+      .robert-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .robert-portrait-frame { aspect-ratio: 3/2; }
+    }
+
+    @media (max-width: 640px) {
+      .trust-bar { flex-direction: column; gap: 28px; }
+      .trust-stat { border-right: none; border-bottom: 1px solid var(--border); padding: 0 0 28px; width: 100%; }
+      .trust-stat:last-child { border-bottom: none; padding-bottom: 0; }
+      .results-grid { grid-template-columns: 1fr; }
+      .result-box.main { grid-column: 1; }
+      .nav-tagline { display: none; }
+      .cta-box { padding: 40px 24px; }
+      .lead-modal { padding: 36px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Makerus<span>Consulting</span></a>
+      <div class="nav-right">
+        <span class="nav-tagline">Von Robert Schwagerus</span>
+        <a href="https://calendly.com/d/cq7g-6cd-hnm/erstgesprach-zum-vermogensaufbau" target="_blank" class="btn-nav-cta">
+          Termin buchen
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg-gradient"></div>
+    <div class="hero-grid-bg"></div>
+    <div class="container">
+      <div class="hero-inner">
+
+        <!-- Left -->
+        <div class="hero-left">
+          <div class="section-tag">Kostenloser Rechner</div>
+          <div class="hero-eyebrow">
+            <div class="hero-eyebrow-dot"></div>
+            <span class="hero-eyebrow-text">Sofort verfügbar · Keine Anmeldung nötig</span>
+          </div>
+          <h1 class="hero-headline">
+            In 60 Sekunden weißt du,
+            <span class="line-gold">ob sich die Immobilie rechnet.</span>
+          </h1>
+          <p class="hero-subline">
+            Kein Makler-Pitch. Kein Verkaufsgespräch. Nur deine Zahlen —
+            Cashflow, Rendite und was nach Steuern wirklich übrig bleibt.
+          </p>
+          <div class="trust-pills">
+            <div class="trust-pill"><div class="trust-pill-dot"></div> 120+ Immobilien vermittelt</div>
+            <div class="trust-pill"><div class="trust-pill-dot"></div> 847 Kunden in der Community</div>
+            <div class="trust-pill"><div class="trust-pill-dot"></div> Seit 2017 aktiv</div>
+          </div>
+          <div class="robert-card">
+            <div class="robert-avatar">RS</div>
+            <div>
+              <div class="robert-name">Robert Schwagerus</div>
+              <div class="robert-role">Geschäftsführer · Makerus Consulting</div>
+            </div>
+            <div class="robert-badge">Verifiziert</div>
+          </div>
+        </div>
+
+        <!-- Right: Calculator -->
+        <div class="hero-right">
+          <div class="calc-card">
+            <div class="calc-header">
+              <span class="calc-title">Rendite-Rechner</span>
+              <span class="calc-badge">Kostenlos</span>
+            </div>
+
+            <!-- Main sliders -->
+            <div class="input-group">
+              <div class="input-label">
+                <span class="input-label-text">Kaufpreis</span>
+                <span class="input-value-display" id="dispKaufpreis">200.000 €</span>
+              </div>
+              <input type="range" id="rKaufpreis" min="50000" max="800000" step="5000" value="200000" />
+              <div class="range-labels">
+                <span class="range-label-item">50.000 €</span>
+                <span class="range-label-item">800.000 €</span>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <div class="input-label">
+                <span class="input-label-text">Monatliche Kaltmiete</span>
+                <span class="input-value-display" id="dispMiete">800 €</span>
+              </div>
+              <input type="range" id="rMiete" min="200" max="5000" step="50" value="800" />
+              <div class="range-labels">
+                <span class="range-label-item">200 €</span>
+                <span class="range-label-item">5.000 €</span>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <div class="input-label">
+                <span class="input-label-text">Zinssatz (Finanzierung)</span>
+                <span class="input-value-display" id="dispZins">3,5 %</span>
+              </div>
+              <input type="range" id="rZins" min="1" max="8" step="0.1" value="3.5" />
+              <div class="range-labels">
+                <span class="range-label-item">1 %</span>
+                <span class="range-label-item">8 %</span>
+              </div>
+            </div>
+
+            <!-- Advanced inputs -->
+            <button class="advanced-toggle" id="advToggle" onclick="toggleAdvanced()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              Erweiterte Einstellungen
+            </button>
+            <div class="advanced-inputs" id="advInputs">
+              <div class="input-group">
+                <div class="input-label">
+                  <span class="input-label-text">Eigenkapital</span>
+                  <span class="input-value-display" id="dispEK">0 €</span>
+                </div>
+                <input type="range" id="rEK" min="0" max="200000" step="5000" value="0" />
+                <div class="range-labels">
+                  <span class="range-label-item">0 €</span>
+                  <span class="range-label-item">200.000 €</span>
+                </div>
+              </div>
+              <div class="input-group">
+                <div class="input-label">
+                  <span class="input-label-text">Kaufnebenkosten</span>
+                  <span class="input-value-display" id="dispNK">10,0 %</span>
+                </div>
+                <input type="range" id="rNK" min="5" max="15" step="0.5" value="10" />
+                <div class="range-labels">
+                  <span class="range-label-item">5 %</span>
+                  <span class="range-label-item">15 %</span>
+                </div>
+              </div>
+              <div class="input-group">
+                <div class="input-label">
+                  <span class="input-label-text">AfA-Satz (Abschreibung)</span>
+                  <span class="input-value-display" id="dispAfa">2,0 %</span>
+                </div>
+                <input type="range" id="rAfa" min="2" max="10" step="0.5" value="2" />
+                <div class="range-labels">
+                  <span class="range-label-item">2 %</span>
+                  <span class="range-label-item">10 %</span>
+                </div>
+              </div>
+            </div>
+
+            <hr class="calc-divider" />
+
+            <!-- Results -->
+            <div class="result-box main">
+              <div class="result-box-label">Bruttomietrendite</div>
+              <div class="result-box-value" id="rRendite" style="color: var(--gold);">4,8 %</div>
+              <div class="result-box-sub">Jahresmiete ÷ Kaufpreis — entscheidend für die Bewertung</div>
+            </div>
+
+            <div class="results-grid">
+              <div class="result-box">
+                <div class="result-box-label">Cashflow / Monat</div>
+                <div class="result-box-value result-box-value secondary" id="rCashflow">—</div>
+                <div class="result-box-sub">Nach Finanzierung & Kosten</div>
+              </div>
+              <div class="result-box">
+                <div class="result-box-label">Steuerersparnis / Jahr</div>
+                <div class="result-box-value result-box-value secondary" id="rSteuer">—</div>
+                <div class="result-box-sub">Schätzwert 42% Steuersatz</div>
+              </div>
+            </div>
+
+            <div class="result-box" style="margin-bottom: 12px;">
+              <div class="result-box-label">Vermögenszuwachs in 10 Jahren</div>
+              <div class="result-box-value result-box-value secondary" id="rVermoegen">—</div>
+              <div class="result-box-sub">Wertsteigerung 3% p.a. + Tilgung</div>
+            </div>
+
+            <!-- Verdict -->
+            <div class="verdict-row">
+              <div>
+                <div class="verdict-label">Bewertung</div>
+                <div class="verdict-sub" id="rVerdictSub">Bitte Sliders anpassen</div>
+              </div>
+              <div class="verdict-badge verdict-orange" id="rVerdictBadge">
+                <div class="verdict-dot"></div>
+                <span id="rVerdictText">—</span>
+              </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="calc-cta-row">
+              <button class="btn-primary" onclick="openLeadModal()">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11.5a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8 8.09a16 16 0 0 0 6 6l1.27-.88a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                Kostenloses Erstgespräch buchen
+              </button>
+              <div class="calc-micro-copy">Kostenlos · Unverbindlich · 30 Minuten</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <section id="trust">
+    <div class="container">
+      <div class="trust-bar">
+        <div class="trust-stat fade-in">
+          <span class="trust-stat-num">120+</span>
+          <div class="trust-stat-label">Immobilien für die Community</div>
+        </div>
+        <div class="trust-stat fade-in">
+          <span class="trust-stat-num">847</span>
+          <div class="trust-stat-label">Mitglieder aktiv</div>
+        </div>
+        <div class="trust-stat fade-in">
+          <span class="trust-stat-num">Ø 5,2 %</span>
+          <div class="trust-stat-label">Bruttomietrendite unserer Objekte</div>
+        </div>
+        <div class="trust-stat fade-in">
+          <span class="trust-stat-num">7 J.</span>
+          <div class="trust-stat-label">Erfahrung in der Branche</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ERKLÄRER -->
+  <section id="erklaerung">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="section-tag">Die Zahlen verstehen</div>
+        <h2>Was bedeuten die Ergebnisse?</h2>
+        <p>Drei Kennzahlen, die du kennen musst, bevor du eine Immobilie kaufst.</p>
+      </div>
+      <div class="explainer-grid">
+        <div class="explainer-card fade-in">
+          <div class="explainer-icon">📊</div>
+          <h3>Bruttomietrendite</h3>
+          <p>
+            Die wichtigste Kennzahl. Sie zeigt dir, wie viel Prozent des Kaufpreises
+            du jährlich als Mieteinnahmen bekommst — <strong>bevor</strong> Kosten abgezogen werden.
+            Unter 4 % ist kritisch. Über 4,8 % ist stark.
+          </p>
+          <span class="explainer-threshold">≥ 4,8 % = sehr gut</span>
+        </div>
+        <div class="explainer-card fade-in">
+          <div class="explainer-icon">💸</div>
+          <h3>Cashflow</h3>
+          <p>
+            Was nach Zins, Tilgung und Bewirtschaftungskosten monatlich übrig bleibt —
+            <strong>inklusive</strong> der monatlichen Steuerersparnis.
+            Positiver Cashflow bedeutet: die Immobilie zahlt sich selbst.
+          </p>
+          <span class="explainer-threshold">Positiv = selbstfinanzierend</span>
+        </div>
+        <div class="explainer-card fade-in">
+          <div class="explainer-icon">📈</div>
+          <h3>Vermögenszuwachs 10 J.</h3>
+          <p>
+            Zeigt dir, wie viel Vermögen in 10 Jahren aufgebaut wird —
+            aus Wertsteigerung (3 % p.a. konservativ angesetzt) plus
+            dem bereits getilgten Kredit. Das ist dein stiller Wohlstandsaufbau.
+          </p>
+          <span class="explainer-threshold">Inkl. 3 % Wertsteigerung p.a.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROBERT -->
+  <section id="robert">
+    <div class="container">
+      <div class="robert-inner">
+        <div class="robert-portrait-frame fade-in">
+          <div class="robert-initials-big">RS</div>
+          <div class="robert-portrait-badge">120+ Objekte</div>
+        </div>
+        <div class="robert-content fade-in">
+          <div class="section-tag">Wer steckt dahinter?</div>
+          <h2>Robert Schwagerus — erste Generation, echte Ergebnisse.</h2>
+          <p>
+            Ich bin kein Erbe und kein Lottogewinner. Mein Vater war Estrichleger,
+            meine Mutter Krankenschwester. Ich habe als Kellner angefangen und
+            nebenbei gelernt, wie Kapital wirklich arbeitet.
+          </p>
+          <p>
+            Seit 2017 bin ich in der Finanzbranche aktiv — heute helfe ich
+            Angestellten und Selbstständigen aus der deutschen Mittelschicht dabei,
+            ihr erstes oder zweites Objekt zu kaufen. Nicht mit Theorie, sondern
+            mit echten Zahlen und echten Immobilien.
+          </p>
+          <ul class="creds-list">
+            <li><span class="creds-check">✓</span> Über 120 Immobilien gemeinsam mit der Community gekauft</li>
+            <li><span class="creds-check">✓</span> Drei-Speichen-Prinzip: Immobilien, Kapitalmarkt, Liquidität</li>
+            <li><span class="creds-check">✓</span> Kein Provisionsmodell — Beratung auf Augenhöhe</li>
+            <li><span class="creds-check">✓</span> Erste Generation — kein Netzwerk, nur Ergebnisse</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section id="cta-final">
+    <div class="container">
+      <div class="cta-box fade-in">
+        <div class="section-tag">Nächster Schritt</div>
+        <h2>Die Zahlen sprechen.<br/><span class="gold">Jetzt lass uns reden.</span></h2>
+        <p>
+          Du hast jetzt eine Idee davon, was eine Immobilie für dich leisten kann.
+          Im kostenlosen Erstgespräch schauen wir uns deine persönliche Situation an —
+          konkret, ehrlich und ohne Verkaufsdruck.
+        </p>
+        <a href="https://calendly.com/d/cq7g-6cd-hnm/erstgesprach-zum-vermogensaufbau" target="_blank" class="btn-cta-final">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Kostenloses Erstgespräch buchen
+        </a>
+        <div class="cta-micro">Kostenlos · Unverbindlich · 30 Minuten · Kein Pitch</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <a href="#" class="footer-logo">Makerus<span>Consulting</span></a>
+        <ul class="footer-links">
+          <li><a href="#">Impressum</a></li>
+          <li><a href="#">Datenschutz</a></li>
+          <li><a href="index.html">Zur Hauptseite</a></li>
+        </ul>
+        <span class="footer-copy">© 2025 Makerus Consulting · Robert Schwagerus</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- LEAD MODAL -->
+  <div class="lead-modal-overlay" id="leadModal">
+    <div class="lead-modal">
+      <button class="lead-modal-close" onclick="closeLeadModal()">✕</button>
+      <div class="lead-modal-icon">📞</div>
+      <h3>Dein persönliches Erstgespräch</h3>
+      <p>
+        Trag deine Kontaktdaten ein — Robert meldet sich innerhalb von 24 Stunden
+        für ein kostenloses, unverbindliches Gespräch.
+      </p>
+      <div class="lead-field">
+        <label>Dein Name (optional)</label>
+        <input type="text" id="leadName" placeholder="Max Mustermann" />
+      </div>
+      <div class="lead-field">
+        <label>E-Mail-Adresse *</label>
+        <input type="email" id="leadEmail" placeholder="max@beispiel.de" />
+      </div>
+      <div class="lead-field">
+        <label>Telefonnummer *</label>
+        <input type="tel" id="leadPhone" placeholder="+49 151 000 000" />
+      </div>
+      <div class="lead-error" id="leadError">Bitte E-Mail und Telefonnummer angeben.</div>
+      <button class="lead-submit" onclick="submitLeadModal()">
+        Erstgespräch anfragen →
+      </button>
+      <div class="lead-privacy">
+        Deine Daten werden nur für die Kontaktaufnahme verwendet und
+        nicht an Dritte weitergegeben. Du kannst dich jederzeit abmelden.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ============================
+       FORMATTERS
+    ============================ */
+    const fmtEuro = v => {
+      const abs = Math.abs(Math.round(v));
+      const sign = v >= 0 ? '' : '-';
+      if (abs >= 1000000) return sign + (abs / 1000000).toFixed(2).replace('.', ',') + ' Mio. €';
+      if (abs >= 1000)    return sign + abs.toLocaleString('de-DE') + ' €';
+      return sign + abs + ' €';
+    };
+    const fmtEuroSign = v => (v >= 0 ? '+' : '') + fmtEuro(v);
+    const fmtPct  = v => v.toFixed(1).replace('.', ',') + ' %';
+
+    /* ============================
+       CALCULATION
+    ============================ */
+    function berechne() {
+      const kaufpreis  = parseFloat(document.getElementById('rKaufpreis').value);
+      const miete      = parseFloat(document.getElementById('rMiete').value);
+      const zinsP      = parseFloat(document.getElementById('rZins').value) / 100;
+      const ek         = parseFloat(document.getElementById('rEK').value);
+      const nkP        = parseFloat(document.getElementById('rNK').value) / 100;
+      const afaP       = parseFloat(document.getElementById('rAfa').value) / 100;
+
+      const nebenkosten       = kaufpreis * nkP;
+      const gesamtinvestition = kaufpreis + nebenkosten;
+      const darlehen          = Math.max(0, gesamtinvestition - ek);
+
+      const zinsenMonat        = darlehen * (zinsP / 12);
+      const tilgungMonat       = darlehen * (0.015 / 12);
+      const bewirtMonat        = kaufpreis * 0.01 / 12;
+
+      const absetzbar          = (kaufpreis * 0.75 * afaP) + (zinsenMonat * 12) + (bewirtMonat * 12);
+      const steuerJahr         = absetzbar * 0.42;
+      const cashflow           = miete - zinsenMonat - tilgungMonat - bewirtMonat + (steuerJahr / 12);
+
+      const bruttoRenditePct   = (miete * 12) / kaufpreis * 100;
+      const vermoegen          = kaufpreis * (Math.pow(1.03, 10) - 1) + tilgungMonat * 12 * 10;
+
+      // Rendite-Farbe
+      const renditeEl = document.getElementById('rRendite');
+      renditeEl.textContent = fmtPct(bruttoRenditePct);
+      renditeEl.style.color = bruttoRenditePct >= 4.8 ? 'var(--green)' : bruttoRenditePct >= 4.0 ? 'var(--orange)' : 'var(--red)';
+
+      // Cashflow
+      const cfEl = document.getElementById('rCashflow');
+      cfEl.textContent = fmtEuroSign(cashflow);
+      cfEl.style.color  = cashflow >= 0 ? 'var(--green)' : 'var(--orange)';
+
+      // Steuer
+      document.getElementById('rSteuer').textContent = fmtEuroSign(steuerJahr);
+      document.getElementById('rSteuer').style.color = 'var(--green)';
+
+      // Vermögen
+      document.getElementById('rVermoegen').textContent = fmtEuro(vermoegen);
+      document.getElementById('rVermoegen').style.color = 'var(--gold)';
+
+      // Verdict
+      const badge = document.getElementById('rVerdictBadge');
+      const text  = document.getElementById('rVerdictText');
+      const sub   = document.getElementById('rVerdictSub');
+
+      if (bruttoRenditePct >= 4.8) {
+        badge.className = 'verdict-badge verdict-green';
+        text.textContent = 'Sehr gut';
+        sub.textContent  = 'Rendite über 4,8 % — starkes Objekt';
+      } else if (bruttoRenditePct >= 4.0) {
+        badge.className = 'verdict-badge verdict-orange';
+        text.textContent = 'Könnte sinnvoll sein';
+        sub.textContent  = 'Rendite 4–4,8 % — lohnt sich genauer zu prüfen';
+      } else {
+        badge.className = 'verdict-badge verdict-red';
+        text.textContent = 'Kritisch prüfen';
+        sub.textContent  = 'Rendite unter 4 % — Kaufpreis oder Miete überdenken';
+      }
+    }
+
+    /* ============================
+       SLIDER SETUP
+    ============================ */
+    function setupSlider(id, dispId, fmt) {
+      const el = document.getElementById(id);
+      const dp = document.getElementById(dispId);
+      el.addEventListener('input', () => {
+        dp.textContent = fmt(parseFloat(el.value));
+        berechne();
+      });
+    }
+
+    setupSlider('rKaufpreis', 'dispKaufpreis', v => Math.round(v).toLocaleString('de-DE') + ' €');
+    setupSlider('rMiete',     'dispMiete',     v => Math.round(v).toLocaleString('de-DE') + ' €');
+    setupSlider('rZins',      'dispZins',      v => fmtPct(v));
+    setupSlider('rEK',        'dispEK',        v => Math.round(v).toLocaleString('de-DE') + ' €');
+    setupSlider('rNK',        'dispNK',        v => fmtPct(v));
+    setupSlider('rAfa',       'dispAfa',       v => fmtPct(v));
+
+    /* ============================
+       ADVANCED TOGGLE
+    ============================ */
+    function toggleAdvanced() {
+      const btn   = document.getElementById('advToggle');
+      const panel = document.getElementById('advInputs');
+      btn.classList.toggle('open');
+      panel.classList.toggle('open');
+    }
+
+    /* ============================
+       LEAD MODAL
+    ============================ */
+    function openLeadModal() {
+      const existing = localStorage.getItem('makerus_lead');
+      if (existing) {
+        window.open('https://calendly.com/d/cq7g-6cd-hnm/erstgesprach-zum-vermogensaufbau', '_blank');
+        return;
+      }
+      document.getElementById('leadModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLeadModal() {
+      document.getElementById('leadModal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function submitLeadModal() {
+      const email = document.getElementById('leadEmail').value.trim();
+      const phone = document.getElementById('leadPhone').value.trim();
+      const errEl = document.getElementById('leadError');
+
+      if (!email || !phone) {
+        errEl.textContent = 'Bitte E-Mail und Telefonnummer angeben.';
+        errEl.style.display = 'block';
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errEl.textContent = 'Bitte gib eine gültige E-Mail-Adresse ein.';
+        errEl.style.display = 'block';
+        return;
+      }
+
+      errEl.style.display = 'none';
+
+      const name = document.getElementById('leadName').value.trim();
+      localStorage.setItem('makerus_lead', JSON.stringify({ name, email, phone, ts: Date.now() }));
+
+      closeLeadModal();
+      window.open('https://calendly.com/d/cq7g-6cd-hnm/erstgesprach-zum-vermogensaufbau', '_blank');
+    }
+
+    document.getElementById('leadModal').addEventListener('click', function(e) {
+      if (e.target === this) closeLeadModal();
+    });
+
+    /* ============================
+       SCROLL ANIMATIONS
+    ============================ */
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    /* ============================
+       INIT
+    ============================ */
+    berechne();
+  </script>
+</body>
+</html>
