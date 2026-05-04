@@ -1491,14 +1491,11 @@
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 1024px) {
-      .hero-inner { grid-template-columns: 1fr; gap: 40px; padding: 48px 0 60px; }
-      .hero-visual { display: flex; justify-content: center; }
-      .hero-card { max-width: 100%; }
+      .hero-inner { gap: 48px; }
       .about-inner { grid-template-columns: 1fr; }
       .about-portrait { max-width: 360px; }
       .about-portrait-frame { aspect-ratio: 3/2; }
       .makerus-inner { grid-template-columns: 1fr; }
-      .rechner-wrapper { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 768px) {
@@ -1515,48 +1512,50 @@
         gap: 16px;
       }
       .nav-mobile-toggle { display: flex; }
-      .hero-headline { font-size: clamp(1.7rem, 6vw, 2.4rem); }
-      .hero-subline { font-size: 0.95rem; }
-      .hero-stats { flex-wrap: wrap; gap: 20px; }
+      .hero-headline { font-size: clamp(1.4rem, 4.5vw, 2.2rem); }
+      .hero-subline { font-size: 0.9rem; }
+      .hero-inner { gap: 32px; padding: 48px 0; }
+      .hero-card { padding: 20px; }
+      .hero-card-metric-val { font-size: 1.2rem; }
+      .hero-stats { flex-wrap: wrap; gap: 16px; }
       .hero-stat { flex: 1 1 40%; }
+      .rechner-header h2 { font-size: 1.3rem; }
+      .rechner-wrapper { gap: 20px; }
+      .rechner-inputs { padding: 20px 16px; }
+      .result-card { padding: 16px; }
+      .result-card-value { font-size: 1.6rem; }
       .pillars-grid { grid-template-columns: 1fr; }
-      .testimonials-grid { grid-template-columns: 1fr; }
-      .result-grid { grid-template-columns: 1fr; }
+      .result-grid { grid-template-columns: 1fr 1fr; }
       .makerus-stats-grid { grid-template-columns: 1fr 1fr; }
-      .footer-inner { flex-direction: column; gap: 32px; }
-      .footer-links-group { min-width: 0; }
-      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .footer-inner { flex-direction: column; gap: 24px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 10px; }
       .footer-disclaimer { text-align: left; font-size: 0.75rem; }
       section { padding: 64px 0; }
       #hero { padding-top: 64px; min-height: auto; }
-      .container { padding: 0 16px; }
-      .hero-card { padding: 24px; }
-      .hero-card-metric-val { font-size: 1.3rem; }
-      .rechner-inputs { padding: 24px 20px; }
-      .result-card { padding: 20px; }
-      .about-quote { font-size: 0.95rem; padding: 16px 20px; }
-      .community-stats { grid-template-columns: 1fr 1fr; gap: 16px; }
-      .payslip-grid { gap: 12px; }
-      .beispiele-grid { grid-template-columns: 1fr; }
+      .container { padding: 0 14px; }
+      .about-quote { font-size: 0.9rem; padding: 16px 18px; }
+      .community-stats { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .payslip-grid { gap: 10px; }
       .faq-grid { grid-template-columns: 1fr; }
-      .modal-box { padding: 32px 20px; }
-      h2 { font-size: clamp(1.5rem, 5vw, 2rem); }
+      .modal-box { padding: 28px 18px; }
+      h2 { font-size: clamp(1.4rem, 4.5vw, 2rem); }
     }
 
     @media (max-width: 480px) {
-      .hero-headline { font-size: 1.65rem; line-height: 1.15; }
+      .hero-headline { font-size: clamp(1.3rem, 5vw, 1.7rem); line-height: 1.2; }
+      .hero-subline { font-size: 0.85rem; }
+      .hero-inner { grid-template-columns: 1fr; gap: 28px; }
+      .hero-visual { display: flex; }
       .hero-actions { flex-direction: column; }
       .btn-primary, .btn-secondary { justify-content: center; width: 100%; }
-      .hero-stats { gap: 16px; }
-      .hero-stat { flex: 1 1 100%; }
-      .hero-stat-num { font-size: 1.6rem; }
+      .hero-stat { flex: 1 1 40%; }
+      .rechner-wrapper { grid-template-columns: 1fr; }
+      .result-grid { grid-template-columns: 1fr 1fr; }
+      .community-stats { grid-template-columns: 1fr 1fr; }
       .cta-actions { flex-direction: column; align-items: center; }
-      .community-stats { grid-template-columns: 1fr; }
-      .community-stat-num { font-size: 2rem; }
-      .payslip-result strong { font-size: 1.3rem; }
-      .rechner-header h2 { font-size: 1.4rem; }
-      .cta-inner h2 { font-size: 1.5rem; }
-      .section-tag { font-size: 0.68rem; }
+      .section-tag { font-size: 0.65rem; }
+      .input-group { margin-bottom: 16px; }
+      .rechner-inputs h3 { font-size: 0.95rem; }
     }
 
     /* ============================
