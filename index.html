@@ -2765,6 +2765,10 @@
       formId: "887bfec9-3666-42d0-bcb5-357a4747e603",
       region: "eu1",
       target: "#hs-form-container",
+      onFormReady: function() {
+        const btn = document.querySelector('#hs-form-container input[type="submit"]');
+        if (btn) btn.value = 'Ergebnisse jetzt erhalten →';
+      },
       onFormSubmitted: function() {
         localStorage.setItem('makerus_lead', JSON.stringify({ ts: Date.now() }));
         unlockResults();
