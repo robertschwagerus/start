@@ -2766,8 +2766,11 @@
       region: "eu1",
       target: "#hs-form-container",
       onFormReady: function() {
-        const btn = document.querySelector('#hs-form-container input[type="submit"]');
-        if (btn) btn.value = 'Ergebnisse jetzt erhalten →';
+        const check = setInterval(function() {
+          const btn = document.querySelector('#hs-form-container input[type="submit"]');
+          if (btn) { btn.value = 'Ergebnisse jetzt erhalten →'; clearInterval(check); }
+        }, 50);
+        setTimeout(function() { clearInterval(check); }, 3000);
       },
       onFormSubmitted: function() {
         localStorage.setItem('makerus_lead', JSON.stringify({ ts: Date.now() }));
