@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://js-eu1.hsforms.net/forms/embed/139527252.js" defer></script>
   <style>
     /* ===== RESET & BASE ===== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -1901,6 +1902,99 @@
       .modal-box { padding: 28px 20px; }
       .modal-box h3 { font-size: 1.25rem; }
     }
+
+    /* ===== HUBSPOT FORM OVERRIDES ===== */
+    .hs-form-frame { margin-top: 4px; }
+
+    .hs-form-frame .hs-richtext,
+    .hs-form-frame .hs-richtext p {
+      color: var(--text-mid) !important;
+      font-size: 0.88rem !important;
+      margin-bottom: 16px !important;
+    }
+
+    .hs-form-frame label,
+    .hs-form-frame .hs-form-field > label {
+      display: block !important;
+      font-size: 0.82rem !important;
+      font-weight: 700 !important;
+      color: var(--text-mid) !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.06em !important;
+      margin-bottom: 6px !important;
+    }
+
+    .hs-form-frame .hs-input,
+    .hs-form-frame input[type="text"],
+    .hs-form-frame input[type="email"],
+    .hs-form-frame input[type="tel"] {
+      width: 100% !important;
+      background: var(--navy-mid) !important;
+      border: 1px solid var(--border) !important;
+      border-radius: 10px !important;
+      padding: 13px 16px !important;
+      color: var(--white) !important;
+      font-size: 1rem !important;
+      font-family: inherit !important;
+      outline: none !important;
+      box-sizing: border-box !important;
+      transition: border-color 0.2s !important;
+    }
+
+    .hs-form-frame .hs-input:focus,
+    .hs-form-frame input:focus {
+      border-color: var(--gold) !important;
+    }
+
+    .hs-form-frame .hs-input::placeholder { color: var(--text-light) !important; }
+
+    .hs-form-frame .hs-form-field { margin-bottom: 14px !important; }
+
+    .hs-form-frame select {
+      background: var(--navy-mid) !important;
+      border: 1px solid var(--border) !important;
+      color: var(--white) !important;
+      padding: 13px 10px !important;
+      font-family: inherit !important;
+    }
+
+    .hs-form-frame .hs-button,
+    .hs-form-frame input[type="submit"] {
+      width: 100% !important;
+      margin-top: 8px !important;
+      padding: 16px !important;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark)) !important;
+      color: var(--navy) !important;
+      border: none !important;
+      border-radius: 12px !important;
+      font-weight: 800 !important;
+      font-size: 1rem !important;
+      font-family: inherit !important;
+      cursor: pointer !important;
+      box-shadow: 0 8px 24px rgba(201,168,76,0.3) !important;
+    }
+
+    .hs-form-frame .hs-button:hover,
+    .hs-form-frame input[type="submit"]:hover {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 12px 32px rgba(201,168,76,0.45) !important;
+    }
+
+    .hs-form-frame .hs-error-msgs,
+    .hs-form-frame .hs-error-msg {
+      color: var(--red) !important;
+      font-size: 0.82rem !important;
+      margin-top: 4px !important;
+      list-style: none !important;
+      padding: 0 !important;
+    }
+
+    .hs-form-frame .submitted-message {
+      color: var(--green) !important;
+      text-align: center !important;
+      padding: 16px 0 !important;
+      font-weight: 600 !important;
+    }
   </style>
 </head>
 <body>
@@ -2491,21 +2585,7 @@
       <div class="modal-badge">Deine Auswertung wartet</div>
       <h3>Wohin schicken wir dein Ergebnis?</h3>
       <p>Wir haben bereits über 120 Menschen dabei geholfen, ihre erste Kapitalanlage-Immobilie zu kaufen. Deine Auswertung zeigt dir, ob du der Nächste sein kannst.</p>
-      <div class="modal-field">
-        <label>Vorname &amp; Nachname <span style="font-weight:400;opacity:0.5;">(optional)</span></label>
-        <input type="text" id="leadName" placeholder="Max Mustermann" autocomplete="name" />
-      </div>
-      <div class="modal-field">
-        <label>E-Mail-Adresse</label>
-        <input type="email" id="leadEmail" placeholder="max@beispiel.de" autocomplete="email" />
-      </div>
-      <div class="modal-field">
-        <label>Telefonnummer</label>
-        <input type="tel" id="leadPhone" placeholder="+49 151 12345678" autocomplete="tel" />
-      </div>
-      <div class="modal-error" id="leadError">Bitte fülle alle Felder aus.</div>
-      <button class="modal-submit" onclick="submitLead()">Meine Auswertung jetzt erhalten →</button>
-      <p class="modal-disclaimer" style="margin-top:10px;">Mit dem Absenden stimmst du unserer <a href="https://makerus-consulting.de/datenschutz/" target="_blank" style="color:var(--gold);text-decoration:underline;">Datenschutzerklärung</a> zu.</p>
+      <div class="hs-form-frame" data-region="eu1" data-form-id="9eab5807-a91f-4a9f-b6bf-500c2e92825c" data-portal-id="139527252"></div>
       <p class="modal-disclaimer">Ein Berater aus unserem Team schaut sich deine Zahlen an und meldet sich persönlich bei dir.</p>
     </div>
   </div>
@@ -2679,32 +2759,14 @@
       document.body.style.overflow = '';
     }
 
-    function submitLead() {
-      const name  = document.getElementById('leadName').value.trim();
-      const email = document.getElementById('leadEmail').value.trim();
-      const phone = document.getElementById('leadPhone').value.trim();
-      const errEl = document.getElementById('leadError');
-
-      if (!email || !phone) {
-        errEl.style.display = 'block';
-        return;
+    // HubSpot form submission → unlock results
+    window.addEventListener('message', function(event) {
+      if (event.data && event.data.type === 'hsFormCallback' && event.data.eventName === 'onFormSubmitted') {
+        localStorage.setItem('makerus_lead', JSON.stringify({ ts: Date.now() }));
+        unlockResults();
+        closeLeadModal();
       }
-      // Simple email validation
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        errEl.textContent = 'Bitte gib eine gültige E-Mail-Adresse ein.';
-        errEl.style.display = 'block';
-        return;
-      }
-
-      errEl.style.display = 'none';
-
-      // Save to localStorage so returning visitors skip the form
-      localStorage.setItem('makerus_lead', JSON.stringify({ name, email, phone, ts: Date.now() }));
-
-      // Unlock results
-      unlockResults();
-      closeLeadModal();
-    }
+    });
 
     function handleBerechnen() {
       const existing = localStorage.getItem('makerus_lead');
