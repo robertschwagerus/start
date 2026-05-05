@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <script charset="utf-8" type="text/javascript" src="//js-eu1.hsforms.net/forms/embed/v2.js"></script>
   <style>
     /* ===== RESET & BASE ===== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -2585,7 +2584,21 @@
       <div class="modal-badge">Deine Auswertung wartet</div>
       <h3>Wohin schicken wir dein Ergebnis?</h3>
       <p>Wir haben bereits über 120 Menschen dabei geholfen, ihre erste Kapitalanlage-Immobilie zu kaufen. Deine Auswertung zeigt dir, ob du der Nächste sein kannst.</p>
-      <div id="hs-form-container"></div>
+      <div class="modal-field">
+        <label>Vorname &amp; Nachname <span style="font-weight:400;opacity:0.5;">(optional)</span></label>
+        <input type="text" id="leadName" placeholder="Max Mustermann" autocomplete="name" />
+      </div>
+      <div class="modal-field">
+        <label>E-Mail-Adresse</label>
+        <input type="email" id="leadEmail" placeholder="max@beispiel.de" autocomplete="email" />
+      </div>
+      <div class="modal-field">
+        <label>Telefonnummer</label>
+        <input type="tel" id="leadPhone" placeholder="+49 151 12345678" autocomplete="tel" />
+      </div>
+      <div class="modal-error" id="leadError">Bitte fülle alle Felder aus.</div>
+      <button class="modal-submit" onclick="submitLead()">Ergebnisse jetzt erhalten →</button>
+      <p class="modal-disclaimer" style="margin-top:10px;">Mit dem Absenden stimmst du unserer <a href="https://makerus-consulting.de/datenschutz/" target="_blank" style="color:var(--gold);text-decoration:underline;">Datenschutzerklärung</a> zu.</p>
       <p class="modal-disclaimer">Ein Berater aus unserem Team schaut sich deine Zahlen an und meldet sich persönlich bei dir.</p>
     </div>
   </div>
@@ -2759,25 +2772,43 @@
       document.body.style.overflow = '';
     }
 
-    // HubSpot form init
-    hbspt.forms.create({
-      portalId: "139527252",
-      formId: "887bfec9-3666-42d0-bcb5-357a4747e603",
-      region: "eu1",
-      target: "#hs-form-container",
-      onFormReady: function() {
-        const check = setInterval(function() {
-          const btn = document.querySelector('#hs-form-container input[type="submit"]');
-          if (btn) { btn.value = 'Ergebnisse jetzt erhalten →'; clearInterval(check); }
-        }, 50);
-        setTimeout(function() { clearInterval(check); }, 3000);
-      },
-      onFormSubmitted: function() {
-        localStorage.setItem('makerus_lead', JSON.stringify({ ts: Date.now() }));
-        unlockResults();
-        closeLeadModal();
+    function submitLead() {
+      const name  = document.getElementById('leadName').value.trim();
+      const email = document.getElementById('leadEmail').value.trim();
+      const phone = document.getElementById('leadPhone').value.trim();
+      const errEl = document.getElementById('leadError');
+
+      if (!email || !phone) {
+        errEl.textContent = 'Bitte fülle alle Pflichtfelder aus.';
+        errEl.style.display = 'block';
+        return;
       }
-    });
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errEl.textContent = 'Bitte gib eine gültige E-Mail-Adresse ein.';
+        errEl.style.display = 'block';
+        return;
+      }
+      errEl.style.display = 'none';
+
+      // HubSpot API im Hintergrund
+      fetch('https://api.hsforms.com/submissions/v3/integration/submit/139527252/887bfec9-3666-42d0-bcb5-357a4747e603', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fields: [
+            { name: 'firstname', value: name.split(' ')[0] || name },
+            { name: 'lastname',  value: name.split(' ').slice(1).join(' ') || '' },
+            { name: 'email',     value: email },
+            { name: 'phone',     value: phone }
+          ],
+          context: { pageUri: window.location.href, pageName: document.title }
+        })
+      }).catch(function() {});
+
+      localStorage.setItem('makerus_lead', JSON.stringify({ name, email, phone, ts: Date.now() }));
+      unlockResults();
+      closeLeadModal();
+    }
 
     function handleBerechnen() {
       const existing = localStorage.getItem('makerus_lead');
