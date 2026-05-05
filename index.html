@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <script src="https://js-eu1.hsforms.net/forms/embed/139527252.js" defer></script>
+  <script charset="utf-8" type="text/javascript" src="//js-eu1.hsforms.net/forms/embed/v2.js"></script>
   <style>
     /* ===== RESET & BASE ===== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -2585,7 +2585,7 @@
       <div class="modal-badge">Deine Auswertung wartet</div>
       <h3>Wohin schicken wir dein Ergebnis?</h3>
       <p>Wir haben bereits über 120 Menschen dabei geholfen, ihre erste Kapitalanlage-Immobilie zu kaufen. Deine Auswertung zeigt dir, ob du der Nächste sein kannst.</p>
-      <div class="hs-form-frame" data-region="eu1" data-form-id="9eab5807-a91f-4a9f-b6bf-500c2e92825c" data-portal-id="139527252"></div>
+      <div id="hs-form-container"></div>
       <p class="modal-disclaimer">Ein Berater aus unserem Team schaut sich deine Zahlen an und meldet sich persönlich bei dir.</p>
     </div>
   </div>
@@ -2759,9 +2759,13 @@
       document.body.style.overflow = '';
     }
 
-    // HubSpot form submission → unlock results
-    window.addEventListener('message', function(event) {
-      if (event.data && event.data.type === 'hsFormCallback' && event.data.eventName === 'onFormSubmitted') {
+    // HubSpot form init
+    hbspt.forms.create({
+      portalId: "139527252",
+      formId: "887bfec9-3666-42d0-bcb5-357a4747e603",
+      region: "eu1",
+      target: "#hs-form-container",
+      onFormSubmitted: function() {
         localStorage.setItem('makerus_lead', JSON.stringify({ ts: Date.now() }));
         unlockResults();
         closeLeadModal();
