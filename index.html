@@ -2531,6 +2531,22 @@
         window.scrollTo({ top, behavior: 'smooth' });
       });
     });
+
+    // Auto-Carousel für Beispielimmobilien auf Mobile
+    (function() {
+      const grid = document.querySelector('.beispiele-grid');
+      if (!grid) return;
+      let index = 0;
+      function nextSlide() {
+        if (window.innerWidth > 768) return;
+        const cards = grid.querySelectorAll('.beispiel-card');
+        if (!cards.length) return;
+        index = (index + 1) % cards.length;
+        cards[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+      }
+      setInterval(nextSlide, 5000);
+      grid.addEventListener('touchstart', function() { index = Math.round(grid.scrollLeft / grid.offsetWidth); }, { passive: true });
+    })();
   </script>
 
 
