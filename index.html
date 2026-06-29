@@ -1508,11 +1508,24 @@
     }
     @media (max-width: 768px) { .faq-grid { grid-template-columns: 1fr; } }
 
+    /* ---- MOBILE: Hero Stats ---- */
+    @media (max-width: 480px) {
+      .hero-stats { gap: 16px !important; margin-top: 28px !important; padding-top: 24px !important; }
+      .hero-stat-num { font-size: 1.35rem !important; }
+      .hero-stat-label { font-size: 0.7rem !important; }
+    }
+
     /* ---- MOBILE: Warum-Sektion ---- */
     @media (max-width: 768px) {
+      #warum { padding: 56px 0 48px !important; }
       #warum .warum-stats { grid-template-columns: 1fr !important; }
       #warum .warum-vornach { font-size: 0.85rem; }
       #warum .warum-vornach > div { padding: 12px 14px !important; }
+    }
+
+    /* ---- MOBILE: Vergleich-Abstand ---- */
+    @media (max-width: 768px) {
+      #vergleich { padding: 56px 0 !important; }
     }
 
     /* ---- MOBILE: Prozess-Timeline ---- */
