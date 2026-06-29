@@ -2542,10 +2542,13 @@
         const cards = grid.querySelectorAll('.beispiel-card');
         if (!cards.length) return;
         index = (index + 1) % cards.length;
-        cards[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+        grid.scrollTo({ left: cards[index].offsetLeft, behavior: 'smooth' });
       }
       setInterval(nextSlide, 5000);
-      grid.addEventListener('touchstart', function() { index = Math.round(grid.scrollLeft / grid.offsetWidth); }, { passive: true });
+      grid.addEventListener('touchstart', function() {
+        const cards = grid.querySelectorAll('.beispiel-card');
+        if (cards.length) index = Math.round(grid.scrollLeft / cards[0].offsetWidth);
+      }, { passive: true });
     })();
   </script>
 
