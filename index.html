@@ -1451,7 +1451,7 @@
         gap: 16px;
       }
       .nav-mobile-toggle { display: flex; }
-      .hero-headline { font-size: clamp(1.4rem, 4.5vw, 2.2rem); }
+      .hero-headline { font-size: clamp(1.9rem, 7vw, 2.6rem); }
       .hero-subline { font-size: 0.9rem; }
       .hero-inner { gap: 32px; padding: 48px 0; }
       .hero-card { padding: 20px; }
@@ -1477,7 +1477,7 @@
     }
 
     @media (max-width: 480px) {
-      .hero-headline { font-size: clamp(1.3rem, 5vw, 1.7rem); line-height: 1.2; }
+      .hero-headline { font-size: clamp(1.7rem, 8vw, 2.2rem); line-height: 1.2; }
       .hero-subline { font-size: 0.85rem; }
       .hero-inner { grid-template-columns: 1fr; gap: 28px; }
       .hero-visual { display: flex; }
@@ -1551,12 +1551,24 @@
 
     /* ---- MOBILE: Vergleich-Tabelle ---- */
     @media (max-width: 640px) {
-      .vergleich-grid {
-        grid-template-columns: 1.1fr 1.4fr !important;
+      #vergleich .vergleich-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: var(--radius);
       }
-      .vg-other { display: none; }
+      .vergleich-grid {
+        grid-template-columns: 140px 1fr 1fr !important;
+        min-width: 520px;
+      }
+      .vg-other { display: flex !important; }
       .vg-cell { padding: 12px 10px !important; font-size: 0.8rem !important; }
       .vg-head { padding: 14px 10px !important; }
+    }
+
+    /* ---- MOBILE: Community Masonry balance ---- */
+    @media (max-width: 768px) {
+      .community-photo-grid { column-fill: balance; }
+      .community-photo-item:last-child { break-before: column; }
     }
     .faq-item {
       background: #1a2035;
@@ -1951,8 +1963,8 @@
       <div class="fade-in" style="max-width:720px;margin:0 auto 64px;">
         <p style="text-align:center;color:var(--text-mid);margin-bottom:28px;font-size:1rem;">Die Welt hat sich verändert. Wer noch mit den Regeln von gestern spielt, verliert nach den Regeln von heute.</p>
         <div class="warum-vornach" style="display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--border);border-radius:14px;overflow:hidden;">
-          <div style="padding:16px 24px;font-weight:700;color:var(--text-mid);background:rgba(255,255,255,0.02);border-bottom:1px solid var(--border);font-size:0.9rem;text-transform:uppercase;letter-spacing:.05em;">Gestern</div>
-          <div style="padding:16px 24px;font-weight:700;color:var(--gold);background:rgba(201,168,76,0.06);border-bottom:1px solid var(--border);border-left:1px solid rgba(201,168,76,0.25);font-size:0.9rem;text-transform:uppercase;letter-spacing:.05em;">Heute</div>
+          <div style="padding:16px 24px;font-weight:700;color:var(--text-mid);background:rgba(255,255,255,0.02);border-bottom:1px solid var(--border);font-size:0.9rem;text-transform:uppercase;letter-spacing:.05em;">Vor Corona</div>
+          <div style="padding:16px 24px;font-weight:700;color:var(--gold);background:rgba(201,168,76,0.06);border-bottom:1px solid var(--border);border-left:1px solid rgba(201,168,76,0.25);font-size:0.9rem;text-transform:uppercase;letter-spacing:.05em;">Nach Corona</div>
 
           <div style="padding:16px 24px;border-bottom:1px solid var(--border);color:var(--text-mid);">Niedrige Zinsen, billiges Geld</div>
           <div style="padding:16px 24px;border-bottom:1px solid var(--border);border-left:1px solid rgba(201,168,76,0.15);background:rgba(201,168,76,0.03);">Hohe Zinsen, teures Geld</div>
@@ -2086,7 +2098,7 @@
         <h2>Was du mit uns bekommst. Und was nicht.</h2>
         <p style="color:var(--text-mid);margin-top:16px;font-size:1.05rem;max-width:560px;margin-left:auto;margin-right:auto;">Die meisten Makler verkaufen dir eine Immobilie und sind danach weg. Bei uns fängt die Arbeit da erst an.</p>
       </div>
-      <div class="vergleich-grid fade-in">
+      <div class="vergleich-wrap fade-in"><div class="vergleich-grid">
 
         <!-- Header row -->
         <div class="vg-cell vg-head vg-label">Leistung</div>
@@ -2128,7 +2140,7 @@
         <div class="vg-cell vg-makerus"><span class="v-check">✓</span> Für dich kostenlos. Wir werden vom Projektträger vergütet, nicht von dir</div>
         <div class="vg-cell vg-other">Provision bis zu 3,57 % des Kaufpreises</div>
 
-      </div>
+      </div></div>
       <div style="text-align:center;margin-top:48px;" class="fade-in">
         <a href="https://calendly.com/d/cq7g-6cd-hnm/erstgesprach-zum-vermogensaufbau" target="_blank" class="btn-primary-large">
           Jetzt kostenloses Erstgespräch sichern →
