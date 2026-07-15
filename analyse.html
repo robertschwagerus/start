@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -712,8 +714,13 @@
           </div>
           <h1 id="thanksHeadline">Danke!</h1>
           <p>Wir melden uns <strong style="color:var(--gold)">telefonisch in den nächsten 48 Stunden</strong> bei dir für dein kostenfreies Erstgespräch.</p>
+          <p style="margin-top:24px;margin-bottom:16px;font-size:0.95rem;color:var(--text-light);">Oder wähle direkt jetzt ein freies Zeitfenster im Kalender:</p>
           <div class="thanks-actions">
-            <a href="index.html" class="thanks-btn primary">Zurück zur Startseite</a>
+            <a href="" onclick="Calendly.initPopupWidget({url:'https://calendly.com/d/cq7g-6cd-hnm/erstgesprach-zum-vermogensaufbau'});return false;" class="thanks-btn primary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Termin im Kalender wählen
+            </a>
+            <a href="index.html" class="thanks-btn">Zurück zur Startseite</a>
             <a href="https://www.instagram.com/robertschwagerus/" target="_blank" rel="noopener" class="thanks-btn">Robert auf Instagram</a>
           </div>
         </div>
