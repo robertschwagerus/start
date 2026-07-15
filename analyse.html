@@ -722,8 +722,8 @@
       currentScreen = n;
       updateProgress();
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      backBtn.style.display = (n > 1 && n < 10) ? 'block' : 'none';
-      progressWrap.style.display = (n === 10) ? 'none' : 'block';
+      backBtn.style.display = (n > 1 && n < 8) ? 'block' : 'none';
+      progressWrap.style.display = (n === 1 || n === 9) ? 'none' : 'block';
     }
 
     function updateProgress() {
@@ -830,7 +830,7 @@
         } catch (_) {}
 
         document.getElementById('thanksHeadline').textContent = `Danke, ${firstname}!`;
-        showScreen(10);
+        showScreen(9);
       } catch (err) {
         console.error(err);
         formError.textContent = 'Es ist ein Fehler aufgetreten. Bitte versuche es erneut oder kontaktiere uns direkt per E-Mail.';
@@ -841,7 +841,7 @@
     });
 
     // Init
-    updateProgress();
+    showScreen(1);
   </script>
 
 </body>
