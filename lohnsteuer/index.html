@@ -103,6 +103,8 @@
       margin: 0 auto;
       font-weight: 400;
     }
+    .hero-sub strong { color: var(--gold-light); font-weight: 700; }
+    .br-mobile { display: none; }
 
     /* ============ VIDEO ============ */
     .video-section {
@@ -295,16 +297,22 @@
 
     /* ============ RESPONSIVE ============ */
     @media (max-width: 700px) {
-      .hero { padding: 70px 0 20px; }
-      .video-section { padding: 24px 0 40px; }
-      .faq { padding: 60px 0 70px; }
+      .hero { padding: 46px 0 16px; }
+      .video-section { padding: 20px 0 12px; }
+      .video-section > .container { padding: 0; }
+      .video-wrap { aspect-ratio: 1 / 1; border-radius: 0; border-left: none; border-right: none; box-shadow: 0 12px 30px rgba(0,0,0,0.4); }
+      .cta-under-video { padding: 24px 0 44px; }
+      .mission-line { margin-top: 18px; }
+      .play-btn { width: 64px; height: 64px; }
+      .play-btn svg { width: 24px; height: 24px; }
+      .play-overlay { background: linear-gradient(180deg, rgba(10, 22, 40, 0.25) 0%, rgba(10, 22, 40, 0.65) 100%); }
+      .br-mobile { display: inline; }
+      .faq { padding: 44px 0 60px; }
       .faq-question { font-size: 0.98rem; padding: 20px 18px; }
       .container { padding: 0 18px; }
     }
     @media (max-width: 420px) {
       .container { padding: 0 14px; }
-      .play-btn { width: 72px; height: 72px; }
-      .play-btn svg { width: 26px; height: 26px; }
     }
   </style>
 </head>
@@ -323,7 +331,7 @@
     <div class="container">
       <h1>Lohnsteuer <span class="neq">≠</span> Reichensteuer</h1>
       <p class="hero-sub">
-        Gleiches Gehalt. Über 500 € Unterschied beim Netto.
+        Gleiches Gehalt.<br class="br-mobile"> <strong>500 € mehr Netto.</strong> Jeden Monat.
       </p>
     </div>
   </section>
@@ -336,7 +344,7 @@
           id="mainVideo"
           poster="video-poster.jpg"
           playsinline
-          preload="metadata"
+          preload="none"
           controls
         >
           <source src="robert-video.mp4" type="video/mp4" />
