@@ -735,6 +735,10 @@
             <input type="text" id="firstname" name="firstname" placeholder="Vorname" autocomplete="given-name" required />
           </div>
           <div class="form-group">
+            <label for="lastname">Nachname</label>
+            <input type="text" id="lastname" name="lastname" placeholder="Nachname" autocomplete="family-name" required />
+          </div>
+          <div class="form-group">
             <label for="phone">Telefonnummer</label>
             <div class="phone-wrap">
               <select class="phone-select" id="phoneCountry" name="phoneCountry" aria-label="Ländervorwahl">
@@ -859,12 +863,13 @@
       formError.classList.remove('show');
 
       const firstname = document.getElementById('firstname').value.trim();
+      const lastname = document.getElementById('lastname').value.trim();
       const phoneCountry = document.getElementById('phoneCountry').value;
       const phoneRaw = document.getElementById('phone').value.trim();
       const phone = phoneRaw ? `${phoneCountry} ${phoneRaw.replace(/^0+/, '')}` : '';
       const email = document.getElementById('email').value.trim();
 
-      if (!firstname || !phoneRaw || !email) {
+      if (!firstname || !lastname || !phoneRaw || !email) {
         formError.textContent = 'Bitte fülle alle Felder aus.';
         formError.classList.add('show');
         return;
@@ -892,6 +897,7 @@
       const payload = {
         fields: [
           { name: 'firstname', value: firstname },
+          { name: 'lastname', value: lastname },
           { name: 'email', value: email },
           { name: 'phone', value: phone },
           { name: 'eigenkapital', value: answers.angespart || '' },
@@ -920,7 +926,7 @@
 
         try {
           localStorage.setItem('makerus_lead', JSON.stringify({
-            firstname, email, phone,
+            firstname, lastname, email, phone,
             submittedAt: new Date().toISOString()
           }));
         } catch (_) {}
