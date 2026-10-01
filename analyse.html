@@ -544,25 +544,8 @@
   <main>
     <div class="screen-wrap">
 
-      <!-- ===== SCREEN 1: INTRO ===== -->
-      <section class="screen active" data-screen="1">
-        <div class="intro">
-          <div class="intro-image">
-            <img src="robert.jpg" alt="Robert Schwagerus – Makerus Consulting" />
-          </div>
-          <div class="intro-content">
-            <div class="intro-badge">Steuerumwandlung</div>
-            <h1>Finde heraus, wie viel deiner Lohnsteuer du zurückholen kannst.</h1>
-            <button class="btn-primary" data-action="next">
-              Los geht's
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </button>
-          </div>
-        </div>
-      </section>
-
       <!-- ===== SCREEN 2: PAIN 1 — Zu viele Steuern? ===== -->
-      <section class="screen" data-screen="2">
+      <section class="screen active" data-screen="2">
         <h1>Bist du der Meinung, du zahlst zu viele Steuern?</h1>
         <div class="options grid-2" data-question="pain_steuern">
           <button class="option card" data-value="Ja">
@@ -819,8 +802,8 @@
       currentScreen = n;
       updateProgress();
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      backBtn.style.display = (n > 1 && n < 9) ? 'block' : 'none';
-      progressWrap.style.display = (n === 1 || n === 10) ? 'none' : 'block';
+      backBtn.style.display = (n > 2 && n < 9) ? 'block' : 'none';
+      progressWrap.style.display = (n === 10) ? 'none' : 'block';
     }
 
     function updateProgress() {
@@ -829,11 +812,6 @@
       progressLabel.textContent = `${q} / ${TOTAL_QUESTIONS}`;
       progressFill.style.width = `${(q / TOTAL_QUESTIONS) * 100}%`;
     }
-
-    // Start button
-    document.querySelector('[data-action="next"]').addEventListener('click', () => {
-      showScreen(2);
-    });
 
     // Option cards
     document.querySelectorAll('.options').forEach(group => {
@@ -943,7 +921,7 @@
     });
 
     // Init
-    showScreen(1);
+    showScreen(2);
   </script>
 
 </body>
